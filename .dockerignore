@@ -1,0 +1,7 @@
+.dockerignore
+node_modules
+yarn-debug.log
+README.md
+.gitignore
+docker-compose.yml
+nginx/

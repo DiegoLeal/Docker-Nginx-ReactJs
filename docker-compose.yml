@@ -1,0 +1,48 @@
+version: '3'
+services:
+    nginx:
+        build:
+            context: .       
+            dockerfile: ./docker/nginx.dockerfile
+        container_name: preentrega
+        expose:
+        - 8080
+        ports:
+            - "80:80"
+        networks: 
+            - production-network
+        depends_on: 
+            - "node1"
+            - "node2"
+            - "node3" 
+
+    node1:
+        build:
+            context: .  
+            dockerfile: ./docker/pre-entrega.dockerfile                  
+        container_name: pre-entrega-1
+        ports:
+            - "9009"    
+
+    node2:
+        build:
+            context: .   
+            dockerfile: ./docker/pre-entrega.dockerfile              
+        container_name: pre-entrega-2
+        ports:
+            - "9009"        
+
+    node3:
+        build:
+            context: . 
+            dockerfile: ./docker/pre-entrega.dockerfile                
+        container_name: pre-entrega-3
+        ports:
+            - "9009"
+        networks: 
+            - production-network
+        
+
+networks: 
+    production-network:
+        driver: bridge
